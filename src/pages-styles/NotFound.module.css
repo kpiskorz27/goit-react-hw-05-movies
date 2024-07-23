@@ -1,0 +1,37 @@
+.container {
+  margin: 0 auto;
+  max-width: 280px;
+  padding: 2rem 0.5rem;
+}
+
+.main {
+  text-align: center;
+}
+
+.heading {
+  font-size: 30px;
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    font-size: 18px;
+    max-width: 650px;
+    padding: 2rem 1rem;
+  }
+
+  .heading {
+    font-size: 36px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    font-size: 20px;
+    max-width: 1000px;
+  }
+
+  .heading {
+    font-size: 42px;
+  }
+}
