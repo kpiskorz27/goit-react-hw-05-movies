@@ -24,9 +24,6 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.main {
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -71,7 +68,6 @@
 }
 
 .buttonSubmit {
-  composes: button;
   margin: 0 auto;
   width: 50%;
 }
@@ -105,7 +101,6 @@
 }
 
 .buttonPage {
-  composes: button;
   width: 100%;
 }
 

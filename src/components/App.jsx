@@ -15,8 +15,7 @@ export const App = () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTljNWY3ZjM0NjhmOGJiMTI0NWU0ODg4NWU2NDFmZCIsIm5iZiI6MTcyMTc2NzY2MC4wNDI3MDIsInN1YiI6IjY1ZjIwZWQ2ZTlkYTY5MDE0OTVlNmFjNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gI10eNaG4LRColzEs6y0nTpYlw-tYDoMdXSvJ7ab_8Y',
+        Authorization: `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
       },
     };
 
