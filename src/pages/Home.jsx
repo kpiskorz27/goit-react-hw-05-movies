@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import css from '../pages-styles/Home.module.css';
 
 const Home = ({ handleFetching }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [results, setResults] = useState([]);
   const [error, setError] = useState(false);
 
@@ -13,31 +15,34 @@ const Home = ({ handleFetching }) => {
     )
       .then(data => data.results)
       .then(data => setResults(data))
-      .catch(() => setError(true));
-  }, [handleFetching]);
+      .catch(() => {
+        setError(true);
+        enqueueSnackbar('Error: Failed to get information from the server.', {
+          variant: 'error',
+        });
+      });
+  }, [handleFetching, enqueueSnackbar]);
 
   return (
     <main>
       <div className={css.container}>
         <h2 className={css.secondHeading}>Trending today</h2>
-        {(error || !results) && (
+        {(error || !results.length) && (
           <p className={css.error}>
             Error: Failed to get information from the server.
           </p>
         )}
-        {results && (
+        {results.length > 0 && (
           <div>
-            {results.length > 0 && (
-              <ul className={css.list}>
-                {results.map(result => (
-                  <li key={result.id}>
-                    <Link className={css.link} to={`/movies/${result.id}`}>
-                      {result.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ul className={css.list}>
+              {results.map(result => (
+                <li key={result.id}>
+                  <Link className={css.link} to={`/movies/${result.id}`}>
+                    {result.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
@@ -49,4 +54,12 @@ Home.propTypes = {
   handleFetching: PropTypes.func.isRequired,
 };
 
-export default Home;
+const App = ({ handleFetching }) => {
+  return (
+    <SnackbarProvider maxSnack={3}>
+      <Home handleFetching={handleFetching} />
+    </SnackbarProvider>
+  );
+};
+
+export default App;
